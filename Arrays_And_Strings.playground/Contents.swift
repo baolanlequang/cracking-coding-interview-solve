@@ -45,6 +45,61 @@ func solveIsUniqueBruteForce(inputStr: String) -> Bool {
     return true
 }
 
+// 1.2 Given two strings, write a method to decide if one is a permutation of the other.
+/*
+ Assume this problem has case sensitive and and two strings have the same lenght, included whitespace
+ Bruteforce solution
+ Time Complex: O(nlogn) + O(n) => total O(nlogn)
+ Space: O(n)
+ */
+func solvePermutationBruteForce(firstStr: String, secondStr: String) -> Bool {
+    if (firstStr.count != secondStr.count) {
+        //two strings have difference length
+        return false
+    }
+    
+    // Swift use IntroSort with O(nlogn)
+    let sorted1 = firstStr.sorted()
+    let sorted2 = secondStr.sorted()
+    
+    return sorted1 == sorted2 //O(n)
+}
+
+/*
+ Assume this problem has case sensitive and and two strings have the same lenght, included whitespace
+ Using dictionary solution
+ Time Complex: O(n)
+ Space: O(n)
+ */
+func solvePermutationWithDictionary(firstStr: String, secondStr: String) -> Bool {
+    if (firstStr.count != secondStr.count) {
+        //two strings have difference length
+        return false
+    }
+    
+    var dicToCheck = [Character:Int]()
+    for char in firstStr {
+        //O(n)
+        if var count = dicToCheck[char] {
+            count += 1
+            dicToCheck[char] = count
+        }
+        else {
+            dicToCheck[char] = 1
+        }
+    }
+    
+    for char in secondStr {
+        //O(n)
+        if (dicToCheck[char] == nil) {
+            return false
+        }
+    }
+    
+    return true
+}
+
 // MARK: - TEST
-var str = "Helo, wrd"
-print("isunique: \(solveIsUniqueBruteForce(inputStr: str))")
+var str1 = "hello world"
+var str2 = "lloherldwo "
+print("isunique: \(solvePermutationWithDictionary(firstStr: str1, secondStr: str2))")
