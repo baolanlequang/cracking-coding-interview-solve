@@ -69,7 +69,7 @@ func solvePermutationBruteForce(firstStr: String, secondStr: String) -> Bool {
  Assume this problem has case sensitive and and two strings have the same lenght, included whitespace
  Using dictionary solution
  Time Complex: O(n)
- Space: O(n)
+ Space: O(n^2)
  */
 func solvePermutationWithDictionary(firstStr: String, secondStr: String) -> Bool {
     if (firstStr.count != secondStr.count) {
